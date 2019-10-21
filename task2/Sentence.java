@@ -1,5 +1,7 @@
 package by.epam.java.kazlova.task2;
 
+import java.util.Objects;
+
 public class Sentence {
     private String clause;
 
@@ -17,4 +19,25 @@ public class Sentence {
     public void setClause(String clause) {
         this.clause = clause;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sentence)) return false;
+        Sentence sentence = (Sentence) o;
+        return Objects.equals(getClause(), sentence.getClause());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClause());
+    }
+
+    @Override
+    public String toString() {
+        return "Sentence{" +
+                "clause='" + clause + '\'' +
+                '}';
+    }
 }
+
