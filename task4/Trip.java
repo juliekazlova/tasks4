@@ -4,6 +4,8 @@ package by.epam.java.kazlova.task4;
 //типа (отдых, экскурсии, лечение, шопинг, круиз и т. д.) для оптимального выбора. Учитывать возможность выбора
 //транспорта, питания и числа дней. Реализовать выбор и сортировку
 
+import java.util.Objects;
+
 enum TripType{
     VACATION,
     EXCURSION,
@@ -27,7 +29,7 @@ enum MealType{
     BREAKFAST
 }
 
-public class Trip {
+public class Trip implements Comparable<Trip>{
     private TripType type;
     private TransportType transport;
     private MealType meal;
@@ -80,5 +82,39 @@ public class Trip {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trip)) return false;
+        Trip trip = (Trip) o;
+        return getDaysCount() == trip.getDaysCount() &&
+                Float.compare(trip.getPrice(), getPrice()) == 0 &&
+                getType() == trip.getType() &&
+                getTransport() == trip.getTransport() &&
+                getMeal() == trip.getMeal();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getTransport(), getMeal(), getDaysCount(), getPrice());
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "type=" + type +
+                ", transport=" + transport +
+                ", meal=" + meal +
+                ", daysCount=" + daysCount +
+                ", price=" + price +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Trip o) {
+       //?????
+        return 0;
     }
 }
