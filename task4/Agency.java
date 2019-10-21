@@ -1,26 +1,37 @@
 package by.epam.java.kazlova.task4;
 
-public class Agency {
-    private Trip[] trips;
+import java.util.List;
+import java.util.Objects;
 
-    public Agency(Trip[] trips) {
+public class Agency {
+    private List<Trip> trips;
+
+    public Agency(List<Trip> trips) {
         this.trips = trips;
     }
 
-    public Trip[] getTrips() {
+    public List<Trip> getTrips() {
         return trips;
     }
 
-    public void setTrips(Trip[] trips) {
+    public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
 
-    public void addTrip(Trip trip){
-        Trip[] newTrips= new Trip[trips.length+1];
-        for(int i=0; i<trips.length; i++){
-            newTrips[i]=trips[i];
-        }
-        newTrips[trips.length]=trip;
-        this.trips=newTrips;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Agency)) return false;
+        Agency agency = (Agency) o;
+        return Objects.equals(getTrips(), agency.getTrips());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTrips());
+    }
+
+
 }
+
+
